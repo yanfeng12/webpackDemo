@@ -14,7 +14,26 @@ module.exports = {
 	},
 	plugins:[
 		new HtmlWebpackPlugin({
-			filename:"main.html"
+			filename:"main.html",
 		})
-	]
+	],
+	//webpack-dev-server,把资源打包到内存，提供实时刷新
+	devServer:{
+		//自动打开服务器地址
+		open:true,
+		//修改端口
+		// port:8090,
+		//默认地址
+		contentBase:"./dist"
+	},
+	module:{
+		rules:[
+			{
+				//正则表达式:以.css结尾
+				test:/\.css$/,
+				//先写"style-loader"
+				use:["style-loader","css-loader"]
+			}
+		]
+	}
 }

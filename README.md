@@ -107,3 +107,127 @@ module.exports = {
 
 ```
 ### 4.运行npm run dev(或者)node_modules/.bin/webpack
+
+
+## 三.webpack-dev-server
+### 1.webpack-dev-server一个能随时重加载的服务器
+### 2.安装npm install webpack-dev-server --save-dev
+### 3.修改package.json
+```
+{
+  "name": "webpackDemo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node_modules/.bin/webpack",
+    "start": "webpack-dev-server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.19.0",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.8"
+  }
+}
+```
+### 4.让⼯具⾃动给我们打开服务器地址,修改端口，默认访问目录
+```
+	devServer:{
+		//自动打开服务器地址
+		open:true,
+		//修改端口
+		// port:8090,
+		//默认地址
+		contentBase:"./dist"
+	},
+```
+### 5.运行npm start
+
+
+## 四.loader
+### 1.有了loader，webpack就会把⾮js⽂件也看成是模块，并且可以引⽤它
+### 2.支持css打包,安装css-loader.运行npm	install	css-loader	--save-dev
+### 3.修改webpack.config.js⽂件，添加css-loader配置项
+```
+const path = require('path') 
+
+//引入插件，作用:自动创建一个html文件，并且把打包好的js文件加入到HTML中
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+module.exports = {
+	//webpack4.0以后加上mode
+	mode: 'development',
+	//webpack的入口
+	entry: './src/index.js',
+	//配置输出目录以及输出文件名字
+	output: {
+		path: path.resolve(__dirname, 'dist'),
+		filename: 'app.js'
+	},
+	plugins:[
+		new HtmlWebpackPlugin({
+			filename:"main.html",
+		})
+	],
+	//webpack-dev-server,把资源打包到内存，提供实时刷新
+	devServer:{
+		//自动打开服务器地址
+		open:true,
+		//修改端口
+		// port:8090,
+		//默认地址
+		contentBase:"./dist"
+	},
+	module:{
+		rules:[
+			{
+				//正则表达式:以.css结尾
+				test:/\.css$/,
+				//先写"style-loader"
+				use:["style-loader","css-loader"]
+			}
+		]
+	}
+}
+```
+### 4.测试。新建index.css
+```
+body{
+	background-color: aliceblue;
+}
+```
+### 5.index.js中引入index.css
+```
+import m1 from './module1'
+import m2 from './module2'
+import m3 from './module3'
+
+m1()
+m2()
+m3()
+//测试webpack-dev-server服务器
+document.write("hello world!!!!!")
+//测试CSS是否可以被引用,使用import
+import "./index.css"
+
+
+```
+### 6.引⼊style-loader,运行npm install style-loader	--save-dev
+### 7.修改webpack.config.js⽂件
+```
+	module:{
+		rules:[
+			{
+				//正则表达式:以.css结尾
+				test:/\.css$/,
+				//先写"style-loader"
+				use:["style-loader","css-loader"]
+			}
+		]
+	}
+```
+### 8.运行npm start
