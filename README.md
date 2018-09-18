@@ -231,3 +231,167 @@ import "./index.css"
 	}
 ```
 ### 8.运行npm start
+
+
+## 五.file-loader支持多种格式图片
+### 1.在src⽬录下新建css⽂件夹，并且在css⽂件夹下创建app.css⽂件，在src⽬录下新建images⽂件夹， 放⼊不同格式图⽚，在app.css中引⼊这张图⽚
+```
+#app{
+	width: 150px;
+	height: 300px;
+	border: 3px solid red;
+	background: url(../images/215.jpg);
+}
+
+#box{
+	width: 500px;
+	height: 500px;
+	border: 3px solid red;
+	background: url(../images/12345.png);
+}
+```
+### 2.在index.js⽂件中引⼊app.css
+```
+import m1 from './module1'
+import m2 from './module2'
+import m3 from './module3'
+
+m1()
+m2()
+m3()
+//测试webpack-dev-server服务器
+//document.write("hello world!!!!!")
+
+
+//测试CSS是否可以被引用,使用import
+//import "./index.css"
+
+
+//用来测试图片是否可以引入
+import "./css/app.css"
+
+
+//可以直接引入图片
+import imgSrc from "./images/215.jpg"
+console.log(imgSrc)
+```
+### 3.安装file-loader.运行npm	install	file-loader	--save-dev
+### 4.修改webpack.config.js
+```
+const path = require('path') 
+
+//引入插件，作用:自动创建一个html文件，并且把打包好的js文件加入到HTML中
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+module.exports = {
+	//webpack4.0以后加上mode
+	mode: 'development',
+	//webpack的入口
+	entry: './src/index.js',
+	//配置输出目录以及输出文件名字
+	output: {
+		path: path.resolve(__dirname, 'dist'),
+		filename: 'app.js'
+	},
+	plugins:[
+		//添加插件
+		new HtmlWebpackPlugin({
+			//自定义生成的文件名字
+			filename:"main1.html",
+			//指定模板
+			template:"src/index.html"
+		})
+	],
+	//webpack-dev-server,把资源打包到内存，提供实时刷新
+	devServer:{
+		//自动打开服务器地址
+		open:true,
+		//修改端口
+		// port:8090,
+		//默认地址
+		contentBase:"./dist"
+	},
+	module:{
+		rules:[
+			//匹配css文件
+			{
+				//正则表达式:以.css结尾
+				test:/\.css$/,
+				//先写"style-loader"
+				use:["style-loader","css-loader"]
+			},
+			//匹配图片文件
+			{
+				test:/\.(jpg|png|webp|gif|bmp)$/,
+				use:["file-loader"]
+			}
+		]
+	}
+}
+
+```
+### 5.运行npm start
+
+
+## 六.url-loader
+### 修改webpack.config.js
+```
+const path = require('path') 
+
+//引入插件，作用:自动创建一个html文件，并且把打包好的js文件加入到HTML中
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+module.exports = {
+	//webpack4.0以后加上mode
+	mode: 'development',
+	//webpack的入口
+	entry: './src/index.js',
+	//配置输出目录以及输出文件名字
+	output: {
+		path: path.resolve(__dirname, 'dist'),
+		filename: 'app.js'
+	},
+	plugins:[
+		//添加插件
+		new HtmlWebpackPlugin({
+			//自定义生成的文件名字
+			filename:"main1.html",
+			//指定模板
+			template:"src/index.html"
+		})
+	],
+	//webpack-dev-server,把资源打包到内存，提供实时刷新
+	devServer:{
+		//自动打开服务器地址
+		open:true,
+		//修改端口
+		// port:8090,
+		//默认地址
+		contentBase:"./dist"
+	},
+	module:{
+		rules:[
+			//匹配css文件
+			{
+				//正则表达式:以.css结尾
+				test:/\.css$/,
+				//先写"style-loader"
+				use:["style-loader","css-loader"]
+			},
+			//匹配图片文件
+			{
+				test:/\.(jpg|png|webp|gif|bmp)$/,
+				//base64适合小图片
+				//use:["url-loader"]
+				use:[{
+					loader:'url-loader',
+					options:{
+						//8K
+						//图片小于8192时转换base64
+						limit:8192
+					}
+				}]
+			}
+		]
+	}
+}
+
+```

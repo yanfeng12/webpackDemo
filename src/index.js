@@ -6,7 +6,18 @@ m1()
 m2()
 m3()
 //测试webpack-dev-server服务器
-document.write("hello world!!!!!")
+//document.write("hello world!!!!!")
+
+
 //测试CSS是否可以被引用,使用import
-import "./index.css"
+//import "./index.css"
+
+
+//用来测试图片是否可以引入
+import "./css/app.css"
+
+
+//可以直接引入图片
+import imgSrc from "./images/215.jpg"
+
 

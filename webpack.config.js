@@ -13,8 +13,12 @@ module.exports = {
 		filename: 'app.js'
 	},
 	plugins:[
+		//添加插件
 		new HtmlWebpackPlugin({
-			filename:"main.html",
+			//自定义生成的文件名字
+			filename:"main1.html",
+			//指定模板
+			template:"src/index.html"
 		})
 	],
 	//webpack-dev-server,把资源打包到内存，提供实时刷新
@@ -28,11 +32,26 @@ module.exports = {
 	},
 	module:{
 		rules:[
+			//匹配css文件
 			{
 				//正则表达式:以.css结尾
 				test:/\.css$/,
 				//先写"style-loader"
 				use:["style-loader","css-loader"]
+			},
+			//匹配图片文件
+			{
+				test:/\.(jpg|png|webp|gif|bmp)$/,
+				//base64适合小图片
+				//use:["url-loader"]
+				use:[{
+					loader:'url-loader',
+					options:{
+						//8K
+						//图片小于8192时转换base64
+						limit:8192
+					}
+				}]
 			}
 		]
 	}
