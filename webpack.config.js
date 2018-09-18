@@ -61,7 +61,9 @@ module.exports = {
 			//es6转换
 			{				
 				test:/\.js$/,				
-				use:['babel-loader'] 
+				use:['babel-loader'] ,
+				//排除node_modules这个⽂件夹，因为这个⽂件夹下放的都是第三⽅包，并不需要我们再次⽤babel去编译了
+				exclude:path.resolve(__dirname,	'node_modules')
 			}
 		]
 	}

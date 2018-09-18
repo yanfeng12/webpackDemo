@@ -422,4 +422,14 @@ npm install babel-loader@7.1.5
 				use:['babel-loader'] 
 			}
 ```
-### 6.运⾏npm	run	dev
+### 6.优化打包时间
+```
+			//es6转换
+			{				
+				test:/\.js$/,				
+				use:['babel-loader'] ,
+				//排除node_modules这个⽂件夹，因为这个⽂件夹下放的都是第三⽅包，并不需要我们再次⽤babel去编译了
+				exclude:path.resolve(__dirname,	'node_modules')
+			}
+```
+### 7.运⾏npm	run	dev
