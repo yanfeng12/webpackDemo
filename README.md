@@ -395,3 +395,31 @@ module.exports = {
 }
 
 ```
+## 七.webpack和babel
+### 1.修改index.js
+```
+//测试Babel
+()	=>	console.log("hello world")
+class demo{}
+```
+### 2.安装babel-core,babel-loader,babel-preset-env.运行npm	 install	babel-loader	babel-core	babel-preset-env	--save-dev
+### 3.注意：如果打包时出现Error: Cannot find module '@babel/core'错误。
+```
+npm uninstall babel-loader
+npm install babel-loader@7.1.5
+```
+### 4.新建.babelrc⽂件
+```
+{
+	"presets":["env"]
+}
+```
+### 5.修改在webpack.config.js,在rules规则数字中增加下⾯代码
+```
+//es6转换
+			{				
+				test:/\.js$/,				
+				use:['babel-loader'] 
+			}
+```
+### 6.运⾏npm	run	dev

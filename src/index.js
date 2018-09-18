@@ -19,5 +19,13 @@ import "./css/app.css"
 
 //可以直接引入图片
 import imgSrc from "./images/215.jpg"
+console.log(imgSrc)
 
 
+//测试是否可以使用字体
+import "font-awesome/css/font-awesome.css"
+
+
+//测试Babel
+()	=>	console.log("hello world")
+class demo{}

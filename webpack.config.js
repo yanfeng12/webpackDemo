@@ -52,6 +52,16 @@ module.exports = {
 						limit:8192
 					}
 				}]
+			},
+			//匹配字体文件
+			{
+				test:/\.(eot|svg|ttf|woff|woff2)$/,
+				use:['file-loader']
+			},
+			//es6转换
+			{				
+				test:/\.js$/,				
+				use:['babel-loader'] 
 			}
 		]
 	}
