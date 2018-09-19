@@ -11,7 +11,7 @@ const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin")
 
 const extractcss = new ExtractTextWebpackPlugin({			
 	//打包输出的路径
-	filename:'css/app.css' ,
+	filename:'assets/css/app.css' ,
 	})
 module.exports = {
 	//webpack4.0以后加上mode
@@ -20,14 +20,17 @@ module.exports = {
 	entry: './src/assets/js/index.js',
 	//配置输出目录以及输出文件名字
 	output: {
-		path: path.resolve(__dirname, 'dist/assets'),
-		filename: 'js/app.js'
+		path: path.resolve(__dirname, 'dist'),
+		filename: 'assets/js/app.js',
+		//资源的基础路径，设置什么值就会在原来的路径前面加上这个值
+		//注意：不是在打包输出的文件夹前面加而是资源在最终访问的时候加
+		publicPath: "/"
 	},
 	plugins:[
 		//添加插件
 		new HtmlWebpackPlugin({
 			//自定义生成的文件名字
-			filename:"../index.html",
+			filename:"./index.html",
 			//指定模板
 			template:"src/index.html"
 		}),
@@ -42,7 +45,8 @@ module.exports = {
 		//修改端口
 		// port:8090,
 		//默认地址
-		contentBase:"./dist"
+		contentBase:"./",
+		publicPath: '/'
 	},
 	module:{
 		rules:[
@@ -69,7 +73,7 @@ module.exports = {
 						//图片小于8192时转换base64
 						limit:8192,
 						//[ext]表示文件后缀
-						name:'img/[name].[hash:8][ext]'
+						name:'assets/images/[name].[hash:8].[ext]'
 					}
 				}]
 			},
@@ -79,7 +83,7 @@ module.exports = {
 				use:[{
 					loader:'file-loader',
 					options:{
-						name:'fonts/[name].[hash:8].[ext]'
+						name:'assets/fonts/[name].[hash:8].[ext]'
 					}
 				}]
 			},
