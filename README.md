@@ -538,3 +538,54 @@ plugins:[
 			},
 
 ```
+## 九。CSS分类路径
+### 1.安装插件，extract-text-webpackplugin
+```
+npm	install	extract-text-webpack-plugin	--save-dev
+
+```
+### 2.如果最后运行时摆错： Error: Chunk.entrypoints: Use Chunks.groupsIterable and filter by instanceof Entrypoint instead
+```
+npm install --save-dev extract-text-webpack-plugin@next
+```
+### 3.修改webpack.config.js，引入插件
+```
+const	ExtractTextWebpackPlugin	=	require("extract-text-webpack-plugin")
+
+```
+### 4.实例化对象
+```
+const extractcss = new ExtractTextWebpackPlugin({			
+	//打包输出的路径
+	filename:'css/app.css' ,
+	})
+
+```
+### 5.加入plugins
+```
+	plugins:[
+		//添加插件
+		new HtmlWebpackPlugin({
+			//自定义生成的文件名字
+			filename:"../index.html",
+			//指定模板
+			template:"src/index.html"
+		}),
+		new CleanWebpackPlugin(['dist']),
+			//	这⾥是前⾯实例化得到的对象								
+			extractcss
+	],
+```
+### 6.修改css输出规则
+```
+			{
+				//正则表达式:以.css结尾
+				test:/\.css$/,
+				//先写"style-loader"
+				// use:["style-loader","css-loader"]
+				use: extractcss.extract({
+					fallback:'style-loader',	
+					use:['css-loader']	,
+				})
+			},
+```

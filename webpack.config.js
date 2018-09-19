@@ -5,6 +5,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 //引入清除插件
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+
+//引入插件
+const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin")
+
+const extractcss = new ExtractTextWebpackPlugin({			
+	//打包输出的路径
+	filename:'css/app.css' ,
+	})
 module.exports = {
 	//webpack4.0以后加上mode
 	mode: 'development',
@@ -23,7 +31,9 @@ module.exports = {
 			//指定模板
 			template:"src/index.html"
 		}),
-		new CleanWebpackPlugin(['dist'])
+		new CleanWebpackPlugin(['dist']),
+			//	这⾥是前⾯实例化得到的对象								
+			extractcss
 	],
 	//webpack-dev-server,把资源打包到内存，提供实时刷新
 	devServer:{
@@ -41,7 +51,11 @@ module.exports = {
 				//正则表达式:以.css结尾
 				test:/\.css$/,
 				//先写"style-loader"
-				use:["style-loader","css-loader"]
+				// use:["style-loader","css-loader"]
+				use: extractcss.extract({
+					fallback:'style-loader',	
+					use:['css-loader']	,
+				})
 			},
 			//匹配图片文件
 			{
