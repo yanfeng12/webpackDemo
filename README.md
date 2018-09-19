@@ -433,3 +433,108 @@ npm install babel-loader@7.1.5
 			}
 ```
 ### 7.运⾏npm	run	dev
+
+
+## 八.路径优化
+### 1.先建⽴起这样⼀个⽬录结构
+```
+├──	node_modules 
+├──	src 
+|			├──	assets 
+|							└──	css 
+|											└──	index.css
+|											└──	app.css
+|							└──	img 
+|												└──	1.jpg 
+|												└──	215.jpg 
+|												└──	12345.png 
+|							└──	js 
+|												└──	index.js 
+|												└──	module1.js 
+|												└──	module2.js 
+|												└──	module3.js 
+|			└──	index.html 
+├──	.babelrc 
+├──	package-lock.json 
+├──	package.json 
+├──	webpack.config.js 
+└──	dist
+
+```
+### 2.修改index.js和webpack.config.js中对应路径
+### 3.修改js文件路径,更改webpack.config.js
+```
+//配置输出目录以及输出文件名字
+	output: {
+		path: path.resolve(__dirname, 'dist/assets'),
+		filename: 'js/app.js'
+	},
+```
+### 4.自动删除上次打包的文件
+### 安装clean-webpack-plugin插件
+```
+npm	install	clean-webpack-plugin	--save
+```
+### 修改webpack.config.js，引入插件
+```
+//引入清除插件
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+```
+```
+plugins:[
+		//添加插件
+		new HtmlWebpackPlugin({
+			//自定义生成的文件名字
+			filename:"../index.html",
+			//指定模板
+			template:"src/index.html"
+		}),
+		new CleanWebpackPlugin(['dist'])
+	],
+```
+### 5.修改index.html被输出的路径
+```
+	plugins:[
+		//添加插件
+		new HtmlWebpackPlugin({
+			//自定义生成的文件名字
+			filename:"../index.html",
+			//指定模板
+			template:"src/index.html"
+		}),
+		new CleanWebpackPlugin(['dist'])
+	],
+```
+### 7.把字体⽂件分类
+```
+//匹配字体文件
+			{
+				test:/\.(eot|svg|ttf|woff|woff2)$/,
+				use:[{
+					loader:'file-loader',
+					options:{
+						name:'fonts/[name].[hash:8].[ext]'
+					}
+				}]
+			},
+```
+### 8.把图⽚⽂件分类
+```
+//匹配图片文件
+			{
+				test:/\.(jpg|png|webp|gif|bmp)$/,
+				//base64适合小图片
+				//use:["url-loader"]
+				use:[{
+					loader:'url-loader',
+					options:{
+						//8K
+						//图片小于8192时转换base64
+						limit:8192,
+						//[ext]表示文件后缀
+						name:'img/[name].[hash:8][ext]'
+					}
+				}]
+			},
+
+```

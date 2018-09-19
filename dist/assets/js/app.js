@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/assets/js/index.js");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -97,14 +97,14 @@ eval("var escape = __webpack_require__(/*! ../../css-loader/lib/url/escape.js */
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js!./src/css/app.css":
-/*!***************************************************!*\
-  !*** ./node_modules/css-loader!./src/css/app.css ***!
-  \***************************************************/
+/***/ "./node_modules/css-loader/index.js!./src/assets/css/app.css":
+/*!**********************************************************!*\
+  !*** ./node_modules/css-loader!./src/assets/css/app.css ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("var escape = __webpack_require__(/*! ../../node_modules/css-loader/lib/url/escape.js */ \"./node_modules/css-loader/lib/url/escape.js\");\nexports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/lib/css-base.js */ \"./node_modules/css-loader/lib/css-base.js\")(false);\n// imports\n\n\n// module\nexports.push([module.i, \"#app{\\r\\n\\twidth: 150px;\\r\\n\\theight: 300px;\\r\\n\\tborder: 3px solid red;\\r\\n\\tbackground: url(\" + escape(__webpack_require__(/*! ../images/215.jpg */ \"./src/images/215.jpg\")) + \");\\r\\n}\\r\\n\\r\\n#box{\\r\\n\\twidth: 500px;\\r\\n\\theight: 500px;\\r\\n\\tborder: 3px solid red;\\r\\n\\tbackground: url(\" + escape(__webpack_require__(/*! ../images/12345.png */ \"./src/images/12345.png\")) + \");\\r\\n}\", \"\"]);\n\n// exports\n\n\n//# sourceURL=webpack:///./src/css/app.css?./node_modules/css-loader");
+eval("var escape = __webpack_require__(/*! ../../../node_modules/css-loader/lib/url/escape.js */ \"./node_modules/css-loader/lib/url/escape.js\");\nexports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ \"./node_modules/css-loader/lib/css-base.js\")(false);\n// imports\n\n\n// module\nexports.push([module.i, \"#app{\\r\\n\\twidth: 150px;\\r\\n\\theight: 300px;\\r\\n\\tborder: 3px solid red;\\r\\n\\tbackground: url(\" + escape(__webpack_require__(/*! ../img/215.jpg */ \"./src/assets/img/215.jpg\")) + \");\\r\\n}\\r\\n\\r\\n#box{\\r\\n\\twidth: 500px;\\r\\n\\theight: 500px;\\r\\n\\tborder: 3px solid red;\\r\\n\\tbackground: url(\" + escape(__webpack_require__(/*! ../img/12345.png */ \"./src/assets/img/12345.png\")) + \");\\r\\n}\", \"\"]);\n\n// exports\n\n\n//# sourceURL=webpack:///./src/assets/css/app.css?./node_modules/css-loader");
 
 /***/ }),
 
@@ -113,10 +113,9 @@ eval("var escape = __webpack_require__(/*! ../../node_modules/css-loader/lib/url
   !*** ./node_modules/css-loader/lib/css-base.js ***!
   \*************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-eval("\n\n/*\n\tMIT License http://www.opensource.org/licenses/mit-license.php\n\tAuthor Tobias Koppers @sokra\n*/\n// css base code, injected by the css-loader\nmodule.exports = function (useSourceMap) {\n\tvar list = [];\n\n\t// return the list of modules as css string\n\tlist.toString = function toString() {\n\t\treturn this.map(function (item) {\n\t\t\tvar content = cssWithMappingToString(item, useSourceMap);\n\t\t\tif (item[2]) {\n\t\t\t\treturn \"@media \" + item[2] + \"{\" + content + \"}\";\n\t\t\t} else {\n\t\t\t\treturn content;\n\t\t\t}\n\t\t}).join(\"\");\n\t};\n\n\t// import a list of modules into the list\n\tlist.i = function (modules, mediaQuery) {\n\t\tif (typeof modules === \"string\") modules = [[null, modules, \"\"]];\n\t\tvar alreadyImportedModules = {};\n\t\tfor (var i = 0; i < this.length; i++) {\n\t\t\tvar id = this[i][0];\n\t\t\tif (typeof id === \"number\") alreadyImportedModules[id] = true;\n\t\t}\n\t\tfor (i = 0; i < modules.length; i++) {\n\t\t\tvar item = modules[i];\n\t\t\t// skip already imported module\n\t\t\t// this implementation is not 100% perfect for weird media query combinations\n\t\t\t//  when a module is imported multiple times with different media queries.\n\t\t\t//  I hope this will never occur (Hey this way we have smaller bundles)\n\t\t\tif (typeof item[0] !== \"number\" || !alreadyImportedModules[item[0]]) {\n\t\t\t\tif (mediaQuery && !item[2]) {\n\t\t\t\t\titem[2] = mediaQuery;\n\t\t\t\t} else if (mediaQuery) {\n\t\t\t\t\titem[2] = \"(\" + item[2] + \") and (\" + mediaQuery + \")\";\n\t\t\t\t}\n\t\t\t\tlist.push(item);\n\t\t\t}\n\t\t}\n\t};\n\treturn list;\n};\n\nfunction cssWithMappingToString(item, useSourceMap) {\n\tvar content = item[1] || '';\n\tvar cssMapping = item[3];\n\tif (!cssMapping) {\n\t\treturn content;\n\t}\n\n\tif (useSourceMap && typeof btoa === 'function') {\n\t\tvar sourceMapping = toComment(cssMapping);\n\t\tvar sourceURLs = cssMapping.sources.map(function (source) {\n\t\t\treturn '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */';\n\t\t});\n\n\t\treturn [content].concat(sourceURLs).concat([sourceMapping]).join('\\n');\n\t}\n\n\treturn [content].join('\\n');\n}\n\n// Adapted from convert-source-map (MIT)\nfunction toComment(sourceMap) {\n\t// eslint-disable-next-line no-undef\n\tvar base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));\n\tvar data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;\n\n\treturn '/*# ' + data + ' */';\n}\n\n//# sourceURL=webpack:///./node_modules/css-loader/lib/css-base.js?");
+eval("/*\n\tMIT License http://www.opensource.org/licenses/mit-license.php\n\tAuthor Tobias Koppers @sokra\n*/\n// css base code, injected by the css-loader\nmodule.exports = function(useSourceMap) {\n\tvar list = [];\n\n\t// return the list of modules as css string\n\tlist.toString = function toString() {\n\t\treturn this.map(function (item) {\n\t\t\tvar content = cssWithMappingToString(item, useSourceMap);\n\t\t\tif(item[2]) {\n\t\t\t\treturn \"@media \" + item[2] + \"{\" + content + \"}\";\n\t\t\t} else {\n\t\t\t\treturn content;\n\t\t\t}\n\t\t}).join(\"\");\n\t};\n\n\t// import a list of modules into the list\n\tlist.i = function(modules, mediaQuery) {\n\t\tif(typeof modules === \"string\")\n\t\t\tmodules = [[null, modules, \"\"]];\n\t\tvar alreadyImportedModules = {};\n\t\tfor(var i = 0; i < this.length; i++) {\n\t\t\tvar id = this[i][0];\n\t\t\tif(typeof id === \"number\")\n\t\t\t\talreadyImportedModules[id] = true;\n\t\t}\n\t\tfor(i = 0; i < modules.length; i++) {\n\t\t\tvar item = modules[i];\n\t\t\t// skip already imported module\n\t\t\t// this implementation is not 100% perfect for weird media query combinations\n\t\t\t//  when a module is imported multiple times with different media queries.\n\t\t\t//  I hope this will never occur (Hey this way we have smaller bundles)\n\t\t\tif(typeof item[0] !== \"number\" || !alreadyImportedModules[item[0]]) {\n\t\t\t\tif(mediaQuery && !item[2]) {\n\t\t\t\t\titem[2] = mediaQuery;\n\t\t\t\t} else if(mediaQuery) {\n\t\t\t\t\titem[2] = \"(\" + item[2] + \") and (\" + mediaQuery + \")\";\n\t\t\t\t}\n\t\t\t\tlist.push(item);\n\t\t\t}\n\t\t}\n\t};\n\treturn list;\n};\n\nfunction cssWithMappingToString(item, useSourceMap) {\n\tvar content = item[1] || '';\n\tvar cssMapping = item[3];\n\tif (!cssMapping) {\n\t\treturn content;\n\t}\n\n\tif (useSourceMap && typeof btoa === 'function') {\n\t\tvar sourceMapping = toComment(cssMapping);\n\t\tvar sourceURLs = cssMapping.sources.map(function (source) {\n\t\t\treturn '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'\n\t\t});\n\n\t\treturn [content].concat(sourceURLs).concat([sourceMapping]).join('\\n');\n\t}\n\n\treturn [content].join('\\n');\n}\n\n// Adapted from convert-source-map (MIT)\nfunction toComment(sourceMap) {\n\t// eslint-disable-next-line no-undef\n\tvar base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));\n\tvar data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;\n\n\treturn '/*# ' + data + ' */';\n}\n\n\n//# sourceURL=webpack:///./node_modules/css-loader/lib/css-base.js?");
 
 /***/ }),
 
@@ -125,10 +124,9 @@ eval("\n\n/*\n\tMIT License http://www.opensource.org/licenses/mit-license.php\n
   !*** ./node_modules/css-loader/lib/url/escape.js ***!
   \***************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-eval("\n\nmodule.exports = function escape(url) {\n    if (typeof url !== 'string') {\n        return url;\n    }\n    // If url is already wrapped in quotes, remove them\n    if (/^['\"].*['\"]$/.test(url)) {\n        url = url.slice(1, -1);\n    }\n    // Should url be wrapped?\n    // See https://drafts.csswg.org/css-values-3/#urls\n    if (/[\"'() \\t\\n]/.test(url)) {\n        return '\"' + url.replace(/\"/g, '\\\\\"').replace(/\\n/g, '\\\\n') + '\"';\n    }\n\n    return url;\n};\n\n//# sourceURL=webpack:///./node_modules/css-loader/lib/url/escape.js?");
+eval("module.exports = function escape(url) {\n    if (typeof url !== 'string') {\n        return url\n    }\n    // If url is already wrapped in quotes, remove them\n    if (/^['\"].*['\"]$/.test(url)) {\n        url = url.slice(1, -1);\n    }\n    // Should url be wrapped?\n    // See https://drafts.csswg.org/css-values-3/#urls\n    if (/[\"'() \\t\\n]/.test(url)) {\n        return '\"' + url.replace(/\"/g, '\\\\\"').replace(/\\n/g, '\\\\n') + '\"'\n    }\n\n    return url\n}\n\n\n//# sourceURL=webpack:///./node_modules/css-loader/lib/url/escape.js?");
 
 /***/ }),
 
@@ -150,7 +148,7 @@ eval("\nvar content = __webpack_require__(/*! !../../css-loader!./font-awesome.c
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("module.exports = __webpack_require__.p + \"674f50d287a8c48dc19ba404d20fe713.eot\";\n\n//# sourceURL=webpack:///./node_modules/font-awesome/fonts/fontawesome-webfont.eot?");
+eval("module.exports = __webpack_require__.p + \"fonts/fontawesome-webfont.674f50d2.eot\";\n\n//# sourceURL=webpack:///./node_modules/font-awesome/fonts/fontawesome-webfont.eot?");
 
 /***/ }),
 
@@ -161,7 +159,7 @@ eval("module.exports = __webpack_require__.p + \"674f50d287a8c48dc19ba404d20fe71
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("module.exports = __webpack_require__.p + \"674f50d287a8c48dc19ba404d20fe713.eot\";\n\n//# sourceURL=webpack:///./node_modules/font-awesome/fonts/fontawesome-webfont.eot?");
+eval("module.exports = __webpack_require__.p + \"fonts/fontawesome-webfont.674f50d2.eot\";\n\n//# sourceURL=webpack:///./node_modules/font-awesome/fonts/fontawesome-webfont.eot?");
 
 /***/ }),
 
@@ -172,7 +170,7 @@ eval("module.exports = __webpack_require__.p + \"674f50d287a8c48dc19ba404d20fe71
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("module.exports = __webpack_require__.p + \"912ec66d7572ff821749319396470bde.svg\";\n\n//# sourceURL=webpack:///./node_modules/font-awesome/fonts/fontawesome-webfont.svg?");
+eval("module.exports = __webpack_require__.p + \"fonts/fontawesome-webfont.912ec66d.svg\";\n\n//# sourceURL=webpack:///./node_modules/font-awesome/fonts/fontawesome-webfont.svg?");
 
 /***/ }),
 
@@ -183,7 +181,7 @@ eval("module.exports = __webpack_require__.p + \"912ec66d7572ff821749319396470bd
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("module.exports = __webpack_require__.p + \"b06871f281fee6b241d60582ae9369b9.ttf\";\n\n//# sourceURL=webpack:///./node_modules/font-awesome/fonts/fontawesome-webfont.ttf?");
+eval("module.exports = __webpack_require__.p + \"fonts/fontawesome-webfont.b06871f2.ttf\";\n\n//# sourceURL=webpack:///./node_modules/font-awesome/fonts/fontawesome-webfont.ttf?");
 
 /***/ }),
 
@@ -194,7 +192,7 @@ eval("module.exports = __webpack_require__.p + \"b06871f281fee6b241d60582ae9369b
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("module.exports = __webpack_require__.p + \"af7ae505a9eed503f8b8e6982036873e.woff2\";\n\n//# sourceURL=webpack:///./node_modules/font-awesome/fonts/fontawesome-webfont.woff2?");
+eval("module.exports = __webpack_require__.p + \"fonts/fontawesome-webfont.af7ae505.woff2\";\n\n//# sourceURL=webpack:///./node_modules/font-awesome/fonts/fontawesome-webfont.woff2?");
 
 /***/ }),
 
@@ -205,7 +203,7 @@ eval("module.exports = __webpack_require__.p + \"af7ae505a9eed503f8b8e6982036873
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("module.exports = __webpack_require__.p + \"fee66e712a8a08eef5805a46892932ad.woff\";\n\n//# sourceURL=webpack:///./node_modules/font-awesome/fonts/fontawesome-webfont.woff?");
+eval("module.exports = __webpack_require__.p + \"fonts/fontawesome-webfont.fee66e71.woff\";\n\n//# sourceURL=webpack:///./node_modules/font-awesome/fonts/fontawesome-webfont.woff?");
 
 /***/ }),
 
@@ -225,91 +223,90 @@ eval("/*\n\tMIT License http://www.opensource.org/licenses/mit-license.php\n\tAu
   !*** ./node_modules/style-loader/lib/urls.js ***!
   \***********************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-eval("\n\n/**\n * When source maps are enabled, `style-loader` uses a link element with a data-uri to\n * embed the css on the page. This breaks all relative urls because now they are relative to a\n * bundle instead of the current page.\n *\n * One solution is to only use full urls, but that may be impossible.\n *\n * Instead, this function \"fixes\" the relative urls to be absolute according to the current page location.\n *\n * A rudimentary test suite is located at `test/fixUrls.js` and can be run via the `npm test` command.\n *\n */\n\nmodule.exports = function (css) {\n\t// get current location\n\tvar location = typeof window !== \"undefined\" && window.location;\n\n\tif (!location) {\n\t\tthrow new Error(\"fixUrls requires window.location\");\n\t}\n\n\t// blank or null?\n\tif (!css || typeof css !== \"string\") {\n\t\treturn css;\n\t}\n\n\tvar baseUrl = location.protocol + \"//\" + location.host;\n\tvar currentDir = baseUrl + location.pathname.replace(/\\/[^\\/]*$/, \"/\");\n\n\t// convert each url(...)\n\t/*\n This regular expression is just a way to recursively match brackets within\n a string.\n \t /url\\s*\\(  = Match on the word \"url\" with any whitespace after it and then a parens\n    (  = Start a capturing group\n      (?:  = Start a non-capturing group\n          [^)(]  = Match anything that isn't a parentheses\n          |  = OR\n          \\(  = Match a start parentheses\n              (?:  = Start another non-capturing groups\n                  [^)(]+  = Match anything that isn't a parentheses\n                  |  = OR\n                  \\(  = Match a start parentheses\n                      [^)(]*  = Match anything that isn't a parentheses\n                  \\)  = Match a end parentheses\n              )  = End Group\n              *\\) = Match anything and then a close parens\n          )  = Close non-capturing group\n          *  = Match anything\n       )  = Close capturing group\n  \\)  = Match a close parens\n \t /gi  = Get all matches, not the first.  Be case insensitive.\n  */\n\tvar fixedCss = css.replace(/url\\s*\\(((?:[^)(]|\\((?:[^)(]+|\\([^)(]*\\))*\\))*)\\)/gi, function (fullMatch, origUrl) {\n\t\t// strip quotes (if they exist)\n\t\tvar unquotedOrigUrl = origUrl.trim().replace(/^\"(.*)\"$/, function (o, $1) {\n\t\t\treturn $1;\n\t\t}).replace(/^'(.*)'$/, function (o, $1) {\n\t\t\treturn $1;\n\t\t});\n\n\t\t// already a full url? no change\n\t\tif (/^(#|data:|http:\\/\\/|https:\\/\\/|file:\\/\\/\\/|\\s*$)/i.test(unquotedOrigUrl)) {\n\t\t\treturn fullMatch;\n\t\t}\n\n\t\t// convert the url to a full url\n\t\tvar newUrl;\n\n\t\tif (unquotedOrigUrl.indexOf(\"//\") === 0) {\n\t\t\t//TODO: should we add protocol?\n\t\t\tnewUrl = unquotedOrigUrl;\n\t\t} else if (unquotedOrigUrl.indexOf(\"/\") === 0) {\n\t\t\t// path should be relative to the base url\n\t\t\tnewUrl = baseUrl + unquotedOrigUrl; // already starts with '/'\n\t\t} else {\n\t\t\t// path should be relative to current directory\n\t\t\tnewUrl = currentDir + unquotedOrigUrl.replace(/^\\.\\//, \"\"); // Strip leading './'\n\t\t}\n\n\t\t// send back the fixed url(...)\n\t\treturn \"url(\" + JSON.stringify(newUrl) + \")\";\n\t});\n\n\t// send back the fixed css\n\treturn fixedCss;\n};\n\n//# sourceURL=webpack:///./node_modules/style-loader/lib/urls.js?");
+eval("\n/**\n * When source maps are enabled, `style-loader` uses a link element with a data-uri to\n * embed the css on the page. This breaks all relative urls because now they are relative to a\n * bundle instead of the current page.\n *\n * One solution is to only use full urls, but that may be impossible.\n *\n * Instead, this function \"fixes\" the relative urls to be absolute according to the current page location.\n *\n * A rudimentary test suite is located at `test/fixUrls.js` and can be run via the `npm test` command.\n *\n */\n\nmodule.exports = function (css) {\n  // get current location\n  var location = typeof window !== \"undefined\" && window.location;\n\n  if (!location) {\n    throw new Error(\"fixUrls requires window.location\");\n  }\n\n\t// blank or null?\n\tif (!css || typeof css !== \"string\") {\n\t  return css;\n  }\n\n  var baseUrl = location.protocol + \"//\" + location.host;\n  var currentDir = baseUrl + location.pathname.replace(/\\/[^\\/]*$/, \"/\");\n\n\t// convert each url(...)\n\t/*\n\tThis regular expression is just a way to recursively match brackets within\n\ta string.\n\n\t /url\\s*\\(  = Match on the word \"url\" with any whitespace after it and then a parens\n\t   (  = Start a capturing group\n\t     (?:  = Start a non-capturing group\n\t         [^)(]  = Match anything that isn't a parentheses\n\t         |  = OR\n\t         \\(  = Match a start parentheses\n\t             (?:  = Start another non-capturing groups\n\t                 [^)(]+  = Match anything that isn't a parentheses\n\t                 |  = OR\n\t                 \\(  = Match a start parentheses\n\t                     [^)(]*  = Match anything that isn't a parentheses\n\t                 \\)  = Match a end parentheses\n\t             )  = End Group\n              *\\) = Match anything and then a close parens\n          )  = Close non-capturing group\n          *  = Match anything\n       )  = Close capturing group\n\t \\)  = Match a close parens\n\n\t /gi  = Get all matches, not the first.  Be case insensitive.\n\t */\n\tvar fixedCss = css.replace(/url\\s*\\(((?:[^)(]|\\((?:[^)(]+|\\([^)(]*\\))*\\))*)\\)/gi, function(fullMatch, origUrl) {\n\t\t// strip quotes (if they exist)\n\t\tvar unquotedOrigUrl = origUrl\n\t\t\t.trim()\n\t\t\t.replace(/^\"(.*)\"$/, function(o, $1){ return $1; })\n\t\t\t.replace(/^'(.*)'$/, function(o, $1){ return $1; });\n\n\t\t// already a full url? no change\n\t\tif (/^(#|data:|http:\\/\\/|https:\\/\\/|file:\\/\\/\\/|\\s*$)/i.test(unquotedOrigUrl)) {\n\t\t  return fullMatch;\n\t\t}\n\n\t\t// convert the url to a full url\n\t\tvar newUrl;\n\n\t\tif (unquotedOrigUrl.indexOf(\"//\") === 0) {\n\t\t  \t//TODO: should we add protocol?\n\t\t\tnewUrl = unquotedOrigUrl;\n\t\t} else if (unquotedOrigUrl.indexOf(\"/\") === 0) {\n\t\t\t// path should be relative to the base url\n\t\t\tnewUrl = baseUrl + unquotedOrigUrl; // already starts with '/'\n\t\t} else {\n\t\t\t// path should be relative to current directory\n\t\t\tnewUrl = currentDir + unquotedOrigUrl.replace(/^\\.\\//, \"\"); // Strip leading './'\n\t\t}\n\n\t\t// send back the fixed url(...)\n\t\treturn \"url(\" + JSON.stringify(newUrl) + \")\";\n\t});\n\n\t// send back the fixed css\n\treturn fixedCss;\n};\n\n\n//# sourceURL=webpack:///./node_modules/style-loader/lib/urls.js?");
 
 /***/ }),
 
-/***/ "./src/css/app.css":
-/*!*************************!*\
-  !*** ./src/css/app.css ***!
-  \*************************/
+/***/ "./src/assets/css/app.css":
+/*!********************************!*\
+  !*** ./src/assets/css/app.css ***!
+  \********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("\nvar content = __webpack_require__(/*! !../../node_modules/css-loader!./app.css */ \"./node_modules/css-loader/index.js!./src/css/app.css\");\n\nif(typeof content === 'string') content = [[module.i, content, '']];\n\nvar transform;\nvar insertInto;\n\n\n\nvar options = {\"hmr\":true}\n\noptions.transform = transform\noptions.insertInto = undefined;\n\nvar update = __webpack_require__(/*! ../../node_modules/style-loader/lib/addStyles.js */ \"./node_modules/style-loader/lib/addStyles.js\")(content, options);\n\nif(content.locals) module.exports = content.locals;\n\nif(false) {}\n\n//# sourceURL=webpack:///./src/css/app.css?");
+eval("\nvar content = __webpack_require__(/*! !../../../node_modules/css-loader!./app.css */ \"./node_modules/css-loader/index.js!./src/assets/css/app.css\");\n\nif(typeof content === 'string') content = [[module.i, content, '']];\n\nvar transform;\nvar insertInto;\n\n\n\nvar options = {\"hmr\":true}\n\noptions.transform = transform\noptions.insertInto = undefined;\n\nvar update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ \"./node_modules/style-loader/lib/addStyles.js\")(content, options);\n\nif(content.locals) module.exports = content.locals;\n\nif(false) {}\n\n//# sourceURL=webpack:///./src/assets/css/app.css?");
 
 /***/ }),
 
-/***/ "./src/images/12345.png":
-/*!******************************!*\
-  !*** ./src/images/12345.png ***!
-  \******************************/
+/***/ "./src/assets/img/12345.png":
+/*!**********************************!*\
+  !*** ./src/assets/img/12345.png ***!
+  \**********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("module.exports = __webpack_require__.p + \"f8df5089f8839c2124a1ca2878418255.png\";\n\n//# sourceURL=webpack:///./src/images/12345.png?");
+eval("module.exports = __webpack_require__.p + \"img/12345.f8df5089png\";\n\n//# sourceURL=webpack:///./src/assets/img/12345.png?");
 
 /***/ }),
 
-/***/ "./src/images/215.jpg":
-/*!****************************!*\
-  !*** ./src/images/215.jpg ***!
-  \****************************/
+/***/ "./src/assets/img/215.jpg":
+/*!********************************!*\
+  !*** ./src/assets/img/215.jpg ***!
+  \********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("module.exports = __webpack_require__.p + \"e3dbee74d43a91e155a9baaabb85eb83.jpg\";\n\n//# sourceURL=webpack:///./src/images/215.jpg?");
+eval("module.exports = __webpack_require__.p + \"img/215.e3dbee74jpg\";\n\n//# sourceURL=webpack:///./src/assets/img/215.jpg?");
 
 /***/ }),
 
-/***/ "./src/index.js":
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-eval("\n\nvar _module = __webpack_require__(/*! ./module1 */ \"./src/module1.js\");\n\nvar _module2 = _interopRequireDefault(_module);\n\nvar _module3 = __webpack_require__(/*! ./module2 */ \"./src/module2.js\");\n\nvar _module4 = _interopRequireDefault(_module3);\n\nvar _module5 = __webpack_require__(/*! ./module3 */ \"./src/module3.js\");\n\nvar _module6 = _interopRequireDefault(_module5);\n\n__webpack_require__(/*! ./css/app.css */ \"./src/css/app.css\");\n\nvar _ = __webpack_require__(/*! ./images/215.jpg */ \"./src/images/215.jpg\");\n\nvar _2 = _interopRequireDefault(_);\n\n__webpack_require__(/*! font-awesome/css/font-awesome.css */ \"./node_modules/font-awesome/css/font-awesome.css\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\n(0, _module2.default)();\n(0, _module4.default)();\n(0, _module6.default)();\n//测试webpack-dev-server服务器\n//document.write(\"hello world!!!!!\")\n\n\n//测试CSS是否可以被引用,使用import\n//import \"./index.css\"\n\n\n//用来测试图片是否可以引入\n\n\n//可以直接引入图片\n\nconsole.log(_2.default);\n\n//测试是否可以使用字体\n\n\n//测试Babel\n(function () {\n  return console.log(\"hello world\");\n});\n\nvar demo = function demo() {\n  _classCallCheck(this, demo);\n};\n\n//# sourceURL=webpack:///./src/index.js?");
-
-/***/ }),
-
-/***/ "./src/module1.js":
-/*!************************!*\
-  !*** ./src/module1.js ***!
-  \************************/
+/***/ "./src/assets/js/index.js":
+/*!********************************!*\
+  !*** ./src/assets/js/index.js ***!
+  \********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = m1;\nfunction m1() {\n  console.log(\"hello m1!!!\");\n}\n\n//# sourceURL=webpack:///./src/module1.js?");
+eval("\n\nvar _module = __webpack_require__(/*! ./module1 */ \"./src/assets/js/module1.js\");\n\nvar _module2 = _interopRequireDefault(_module);\n\nvar _module3 = __webpack_require__(/*! ./module2 */ \"./src/assets/js/module2.js\");\n\nvar _module4 = _interopRequireDefault(_module3);\n\nvar _module5 = __webpack_require__(/*! ./module3 */ \"./src/assets/js/module3.js\");\n\nvar _module6 = _interopRequireDefault(_module5);\n\n__webpack_require__(/*! ../css/app.css */ \"./src/assets/css/app.css\");\n\nvar _ = __webpack_require__(/*! ../img/215.jpg */ \"./src/assets/img/215.jpg\");\n\nvar _2 = _interopRequireDefault(_);\n\n__webpack_require__(/*! font-awesome/css/font-awesome.css */ \"./node_modules/font-awesome/css/font-awesome.css\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\n(0, _module2.default)();\n(0, _module4.default)();\n(0, _module6.default)();\n//测试webpack-dev-server服务器\n//document.write(\"hello world!!!!!\")\n\n\n//测试CSS是否可以被引用,使用import\n//import \"./index.css\"\n\n\n//用来测试图片是否可以引入\n\n\n//可以直接引入图片\n\nconsole.log(_2.default);\n\n//测试是否可以使用字体\n\n\n//测试Babel\n(function () {\n  return console.log(\"hello world\");\n});\n\nvar demo = function demo() {\n  _classCallCheck(this, demo);\n};\n\n//# sourceURL=webpack:///./src/assets/js/index.js?");
 
 /***/ }),
 
-/***/ "./src/module2.js":
-/*!************************!*\
-  !*** ./src/module2.js ***!
-  \************************/
+/***/ "./src/assets/js/module1.js":
+/*!**********************************!*\
+  !*** ./src/assets/js/module1.js ***!
+  \**********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = m2;\nfunction m2() {\n  console.log(\"hello m2!!!\");\n}\n\n//# sourceURL=webpack:///./src/module2.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = m1;\nfunction m1() {\n  console.log(\"hello m1!!!\");\n}\n\n//# sourceURL=webpack:///./src/assets/js/module1.js?");
 
 /***/ }),
 
-/***/ "./src/module3.js":
-/*!************************!*\
-  !*** ./src/module3.js ***!
-  \************************/
+/***/ "./src/assets/js/module2.js":
+/*!**********************************!*\
+  !*** ./src/assets/js/module2.js ***!
+  \**********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = m3;\nfunction m3() {\n  console.log(\"hello m3!!!\");\n}\n\n//# sourceURL=webpack:///./src/module3.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = m2;\nfunction m2() {\n  console.log(\"hello m2!!!\");\n}\n\n//# sourceURL=webpack:///./src/assets/js/module2.js?");
+
+/***/ }),
+
+/***/ "./src/assets/js/module3.js":
+/*!**********************************!*\
+  !*** ./src/assets/js/module3.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = m3;\nfunction m3() {\n  console.log(\"hello m3!!!\");\n}\n\n//# sourceURL=webpack:///./src/assets/js/module3.js?");
 
 /***/ })
 
