@@ -14,11 +14,11 @@ m3()
 
 
 //用来测试图片是否可以引入
-import "./css/app.css"
-
+//import "./css/app.css"
+import styles from "../css/app.css"
 
 //可以直接引入图片
-import imgSrc from "./images/215.jpg"
+import imgSrc from "../images/215.jpg"
 console.log(imgSrc)
 
 

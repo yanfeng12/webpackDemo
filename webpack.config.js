@@ -52,14 +52,36 @@ module.exports = {
 		rules:[
 			//匹配css文件
 			{
-				//正则表达式:以.css结尾
-				test:/\.css$/,
-				//先写"style-loader"
-				// use:["style-loader","css-loader"]
+				//这条规则是需要开启模块化的
+				//匹配.css文件
+				test: /\.css$/,
+				//style-loader 作用，把已经打包好的css代码插入到html中
 				use: extractcss.extract({
-					fallback:'style-loader',	
-					use:['css-loader']	,
-				})
+					fallback: 'style-loader',
+					use: [{
+						loader: 'css-loader',
+						options: {
+							//表示开启模块化
+							module: true,
+							//path 路径 name 文件名  local 类名 [hash:base64:8] 生成的hash值
+							localIdentName: '[path]-[name]-[local]-[hash:base64:6]'
+						}
+					}]
+				}),
+				//include 包含
+				include: [path.resolve(__dirname, 'src/assets/css')]
+			},
+			{
+				//这条规则不需要开启模块化
+				//匹配.css文件
+				test: /\.css$/,
+				//style-loader 作用，把已经打包好的css代码插入到html中
+				use: extractcss.extract({
+					fallback: 'style-loader',
+					use: ['css-loader']
+				}),
+				//include 包含
+				include: [path.resolve(__dirname, 'node_modules')]
 			},
 			//匹配图片文件
 			{
